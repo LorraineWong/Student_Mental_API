@@ -2,17 +2,17 @@ from pydantic import BaseModel, Field, validator
 from typing import Optional
 
 class MentalHealthInput(BaseModel):
-    # 特殊字段，需要特定范围验证
+    # Special fields, need specific range validation
     Age: float = Field(ge=0, le=100)
     CGPA: float = Field(ge=0, le=4.0)
     
-    # 基础信息字段
+    # Basic information fields
     Gender: int
     University: int
     Department: int
     Academic_Year: int
     
-    # 心理健康评估字段
+    # Mental health assessment fields
     Waiver_Scholarship: int
     Nervous_Anxious: int
     Worrying: int
