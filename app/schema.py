@@ -1,0 +1,36 @@
+from pydantic import BaseModel
+
+class MentalHealthInput(BaseModel):
+    Age: float
+    Gender: int
+    University: int
+    Department: int
+    Academic_Year: int
+    CGPA: float
+    Waiver_Scholarship: int
+    Nervous_Anxious: int
+    Worrying: int
+    Trouble_Relaxing: int
+    Easily_Annoyed: int
+    Excessive_Worry: int
+    Restless: int
+    Fearful: int
+    Upset: int
+    Lack_of_Control: int
+    Nervous_Stress: int
+    Inadequate_Coping: int
+    Confident: int
+    Things_Going_Well: int
+    Control_Irritations: int
+    Top_Performance: int
+    Angered_by_Performance: int
+    Overwhelmed: int
+    Lack_of_Interest: int
+    Feeling_Down: int
+    Sleep_Issues: int
+    Fatigue: int
+    Appetite_Issues: int
+    Self_Doubt: int
+    Concentration_Issues: int
+    Movement_Issues: int
+    Suicidal_Thoughts: int
