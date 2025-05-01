@@ -1,7 +1,10 @@
-fastapi
-uvicorn
-pandas
-numpy
-scikit-learn
-joblib
-catboost
+fastapi==0.109.2
+uvicorn==0.27.1
+pydantic==2.6.1
+catboost==1.2.2
+scikit-learn==1.4.0
+pandas==2.2.0
+numpy==1.26.3
+pytest==8.0.0
+httpx==0.26.0
+python-dotenv==1.0.1
