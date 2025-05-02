@@ -52,8 +52,8 @@ class MentalHealthInput(BaseModel):
               'Self_Doubt', 'Concentration_Issues', 'Movement_Issues',
               'Suicidal_Thoughts')
     def validate_scale(cls, v):
-        if not 1 <= v <= 3:
-            raise ValueError('Value must be between 1 and 3')
+        if not 0 <= v <= 4:
+            raise ValueError('Value must be between 0 and 4')
         return v
 
     model_config = {
