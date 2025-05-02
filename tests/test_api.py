@@ -6,18 +6,15 @@ from typing import Dict, Any
 BASE_URL = "http://localhost:8006"
 
 def load_test_data() -> Dict[str, Any]:
-    """加载测试数据"""
     with open("tests/test_data.json", "r") as f:
         return json.load(f)
 
 def test_root_endpoint():
-    """测试根端点"""
     response = requests.get(f"{BASE_URL}/")
     assert response.status_code == 200
     assert response.json() == {"message": "API is running!"}
 
 def test_valid_prediction():
-    """测试有效预测请求"""
     test_data = load_test_data()
     response = requests.post(
         f"{BASE_URL}/predict",
@@ -31,7 +28,6 @@ def test_valid_prediction():
     assert "Depression Prediction" in result
 
 def test_invalid_age():
-    """测试无效年龄"""
     test_data = load_test_data()
     response = requests.post(
         f"{BASE_URL}/predict",
@@ -45,7 +41,6 @@ def test_invalid_age():
     assert any("100" in detail["msg"] for detail in error["detail"])
 
 def test_invalid_cgpa():
-    """测试无效CGPA"""
     test_data = load_test_data()
     response = requests.post(
         f"{BASE_URL}/predict",
@@ -59,7 +54,6 @@ def test_invalid_cgpa():
     assert any("4" in detail["msg"] for detail in error["detail"])
 
 def test_invalid_scale():
-    """测试无效量表值"""
     test_data = load_test_data()
     response = requests.post(
         f"{BASE_URL}/predict",
@@ -73,7 +67,6 @@ def test_invalid_scale():
     assert any("between 1 and 3" in detail["msg"] for detail in error["detail"])
 
 def test_missing_fields():
-    """测试缺少必填字段"""
     test_data = load_test_data()
     response = requests.post(
         f"{BASE_URL}/predict",
@@ -87,7 +80,6 @@ def test_missing_fields():
     assert any("Field required" in detail["msg"] for detail in error["detail"])
 
 def test_invalid_json():
-    """测试无效JSON格式"""
     test_data = load_test_data()
     response = requests.post(
         f"{BASE_URL}/predict",
@@ -100,7 +92,6 @@ def test_invalid_json():
     assert any("JSON decode error" in detail["msg"] for detail in error["detail"])
 
 def test_empty_json():
-    """测试空JSON"""
     test_data = load_test_data()
     response = requests.post(
         f"{BASE_URL}/predict",
