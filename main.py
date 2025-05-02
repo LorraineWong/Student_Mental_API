@@ -12,10 +12,10 @@ def root():
 @app.post("/predict")
 def predict(input_data: MentalHealthInput):
     try:
-        # 验证输入数据
+        # input_data is a MentalHealthInput object
         input_dict = input_data.dict()
         
-        # 检查所有必需字段是否存在
+        # check if all required fields exist
         required_fields = [
             "Age", "Gender", "University", "Department", "Academic_Year",
             "CGPA", "Waiver_Scholarship", "Nervous_Anxious", "Worrying",
@@ -36,7 +36,7 @@ def predict(input_data: MentalHealthInput):
                 detail=f"Missing required fields: {', '.join(missing_fields)}"
             )
             
-        # 验证数值范围
+        # check if the values are in the correct range
         if not (0 <= input_dict["Age"] <= 100):
             raise HTTPException(
                 status_code=400,
@@ -49,22 +49,14 @@ def predict(input_data: MentalHealthInput):
                 detail="CGPA must be between 0 and 4.0"
             )
             
-        # 验证其他字段的值范围（1-3）
-        for field in required_fields:
-            if field not in ["Age", "CGPA"] and not (1 <= input_dict[field] <= 3):
-                raise HTTPException(
-                    status_code=400,
-                    detail=f"{field} must be between 1 and 3"
-                )
-        
-        # 进行预测
+        # perform prediction
         result = predict_from_input(input_dict)
         return result
         
     except HTTPException as he:
         raise he
     except Exception as e:
-        # 记录详细错误信息
+        # record detailed error information
         error_detail = f"Error: {str(e)}\nTraceback: {traceback.format_exc()}"
         raise HTTPException(
             status_code=500,
